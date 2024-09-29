@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 
 const Card = ({ url, title, price, discountedPrice, description }) => {
   return (
@@ -7,7 +8,7 @@ const Card = ({ url, title, price, discountedPrice, description }) => {
           src={url} 
           className="card-img-top img-fluid" 
           alt={title} 
-          style={{ height: '200px', width: '80%', objectFit: 'contain', marginTop: '10px' }} // Margen superior para la imagen
+          style={{ height: '200px', width: '80%', objectFit: 'contain', marginTop: '10px' }}
         />
       </div>
       <div className="card-body">
@@ -15,19 +16,15 @@ const Card = ({ url, title, price, discountedPrice, description }) => {
         <p className="card-text" style={{ fontSize: '0.800rem' }}>{description}</p>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'auto' }}>
           {price && (
-            <p className="card-price" style={{ color: 'green', fontWeight: 'bold' }}>{price}</p> // Precio original
+            <p className="card-price" style={{ color: 'green', fontWeight: 'bold' }}>{price}</p>
           )}
           {discountedPrice && (
             <p className="card-discounted-price" style={{ color: 'red', fontWeight: 'bold' }}>
               {discountedPrice} <span style={{ fontSize: '0.8rem', textDecoration: 'line-through' }}>{price}</span>
-            </p> // Precio con descuento
+            </p>
           )}
-          <a 
-            onClick={() => {
-              if (!discountedPrice) {
-                window.location.href = '/formulario';
-              }
-            }} 
+          <Link 
+            to={!discountedPrice ? '/formulario' : '#'}
             className="btn" 
             style={{
               marginTop: '10px',
@@ -39,7 +36,7 @@ const Card = ({ url, title, price, discountedPrice, description }) => {
             disabled={discountedPrice} // Deshabilitar el botón si hay descuento
           >
             {discountedPrice ? 'Descuento Aplicado' : 'Conseguir Descuentos'}
-          </a>
+          </Link>
         </div>
       </div>
     </div>
